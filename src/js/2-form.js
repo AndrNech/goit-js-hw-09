@@ -18,9 +18,13 @@ form.addEventListener('input', e => {
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  formData.email.trim() && formData.message.trim()
-    ? console.log(formData)
-    : window.alert('Fill please all fields');
+
+  if (!formData.email.trim() || !formData.message.trim()) {
+    alert('Fill please all fields');
+    return;
+  }
+  console.log(formData);
   localStorage.removeItem('feedback-form-state');
   form.reset();
+  Object.keys(formData).forEach(key => (formData[key] = ''));
 });
